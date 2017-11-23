@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++11     CMakeFiles/proj_exec.dir/src/buffer.cpp.o CMakeFiles/proj_exec.dir/src/main.cpp.o CMakeFiles/proj_exec.dir/src/tests.cpp.o CMakeFiles/proj_exec.dir/src/ops.cpp.o  -o proj_exec -rdynamic 
