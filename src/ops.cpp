@@ -18,6 +18,10 @@ Buffer decimation_factor_2(const Buffer& b) {
 
 Buffer convolution(const Buffer& x, const Buffer& _h) {
 	Buffer result(x.size() + _h.size() - 1);
-	
-	
+
+	for(int n = 0; n < result.size(); n++) {
+        for(int k = 0; k < _h.size(); ++k) {
+
+        }
+	}
 }

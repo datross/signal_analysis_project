@@ -10,17 +10,11 @@
 vector
 -
 
+/home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/ops.cpp
+ops.h
+/home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/ops.h
+
 /home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/ops.h
 buffer.h
 /home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/buffer.h
-
-/home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/tests.cpp
-tests.h
-/home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/tests.h
-iostream
--
-
-/home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/tests.h
-ops.h
-/home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/ops.h
 
