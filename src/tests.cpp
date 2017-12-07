@@ -6,7 +6,8 @@ using namespace std;
 
 bool test_all() {
 	bool result = test_interpolation_factor_2()
-		&& test_decimation_factor_2();
+		&& test_decimation_factor_2()
+		&& test_convolution();
 
 	if(result) cout << "Tests succeeded." << endl;
 	else cout << "One test failed." << endl;
@@ -39,3 +40,26 @@ bool test_decimation_factor_2() {
 
     return buffer_equal(i, i_expected);
 }
+
+bool test_convolution() {
+    cout << "Test convolution" << endl;
+
+    Buffer x = {1., 2., 3., 4.};
+    Buffer _h = {1., 2.};
+    Buffer conv = convolution(x, _h);
+    Buffer expected = {1., 4., 7., 10., 8.};
+
+    print_buffer(x);
+    print_buffer(_h);
+    print_buffer(conv);
+
+    return buffer_equal(conv, expected);
+}
+
+bool test_analyse_haar()
+{
+    // TODO
+    return false;
+}
+
+

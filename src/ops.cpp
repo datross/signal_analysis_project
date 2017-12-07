@@ -18,10 +18,28 @@ Buffer decimation_factor_2(const Buffer& b) {
 
 Buffer convolution(const Buffer& x, const Buffer& _h) {
 	Buffer result(x.size() + _h.size() - 1);
-
-	for(int n = 0; n < result.size(); n++) {
+    for(int n = 0; n < result.size(); ++n) {
         for(int k = 0; k < _h.size(); ++k) {
-
+            int t = n - _h.size() + k + 1;
+            if(t < 0 || t >= x.size()) continue;
+            result[n] += x[t] * _h[_h.size() - k - 1];
         }
 	}
+    return result;
 }
+
+void analyse_haar(const Buffer& x, Buffer& approx_and_tail)
+{
+#define SQRT_2 1.41421356237
+    const static Buffer _h0 = {1. / SQRT_2, 1. / SQRT_2, 0};
+    const static Buffer _h1 = {1. / SQRT_2, -1. / SQRT_2, 0};
+    
+    Buffer approx = decimation_factor_2(convolution(x, _h0));
+    Buffer tail = decimation_factor_2(convolution(x, _h1));
+    
+    approx_and_tail.clear();
+    approx_and_tail.insert(approx_and_tail.end(), approx.begin(), approx.end());
+    approx_and_tail.insert(approx_and_tail.end(), tail.begin(), tail.end());
+}
+
+

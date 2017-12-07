@@ -1,0 +1,48 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00.\x00s\x00i\x00g\x00n\x00a\x00l\x00_\x00a\x00n\x00a\x00l\x00y\x00s\x00i\x00s\x00_\x00p\x00r\x00o\x00j\x00e\x00c\x00t)
+
+[CMake]
+Build Directory Count=1
+Current Build Directory Index-Host System=0
+
+[CMake][CMake Build Directory 0]
+Build Directory Path=/home/6im3/mcrespin/Documents/Signal/signal_analysis_project/build
+Build Type=
+CMake Binary=/usr/bin/cmake
+CMake Executable=/usr/bin/cmake
+Environment Profile=
+Extra Arguments=
+Install Directory=/usr/local
+Runtime=Host System
+
+[Launch]
+Launch Configurations=Launch Configuration 0
+
+[Launch][Launch Configuration 0]
+Configured Launch Modes=execute
+Configured Launchers=nativeAppLauncher
+Name=proj_exec
+Type=Native Application
+
+[Launch][Launch Configuration 0][Data]
+Arguments=
+Debugger Shell=
+Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x02\x00\x00\x00.\x00s\x00i\x00g\x00n\x00a\x00l\x00_\x00a\x00n\x00a\x00l\x00y\x00s\x00i\x00s\x00_\x00p\x00r\x00o\x00j\x00e\x00c\x00t\x00\x00\x00\x12\x00p\x00r\x00o\x00j\x00_\x00e\x00x\x00e\x00c)
+Dependency Action=Build
+Display Demangle Names=true
+Display Static Members=false
+EnvironmentGroup=
+Executable=file:///home/6im3/mcrespin/Documents/Signal/signal_analysis_project
+External Terminal=konsole --noclose --workdir %workdir -e %exe
+GDB Path=
+Project Target=signal_analysis_project,proj_exec
+Remote GDB Config Script=
+Remote GDB Run Script=
+Remote GDB Shell Script=
+Start With=ApplicationOutput
+Use External Terminal=false
+Working Directory=
+isExecutable=false
+
+[Project]
+VersionControlSupport=kdevgit
