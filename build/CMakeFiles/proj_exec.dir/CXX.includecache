@@ -6,8 +6,24 @@
 
 #IncludeRegexTransform: 
 
+/home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/buffer.cpp
+buffer.h
+/home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/buffer.h
+iostream
+-
+fstream
+-
+string
+-
+stdexcept
+-
+sstream
+-
+
 /home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/buffer.h
 vector
+-
+string
 -
 
 /home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/main.cpp

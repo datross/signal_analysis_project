@@ -1,5 +1,7 @@
 #include "ops.h"
 
+#define SQRT_2 1.41421356237
+
 Buffer interpolation_factor_2(const Buffer& b) {
 	Buffer buf(b.size() * 2);
 	for(int i = 0; i < b.size(); ++i) {
@@ -30,7 +32,6 @@ Buffer convolution(const Buffer& x, const Buffer& _h) {
 
 void analyse_haar(const Buffer& x, Buffer& approx_and_tail)
 {
-#define SQRT_2 1.41421356237
     const static Buffer _h0 = {1. / SQRT_2, 1. / SQRT_2, 0};
     const static Buffer _h1 = {1. / SQRT_2, -1. / SQRT_2, 0};
     
@@ -42,4 +43,14 @@ void analyse_haar(const Buffer& x, Buffer& approx_and_tail)
     approx_and_tail.insert(approx_and_tail.end(), tail.begin(), tail.end());
 }
 
+void synthese_haar(Buffer& x, const Buffer& approx_and_tail)
+{
+    const static Buffer _g0 = {0., 1. / SQRT_2, 1. / SQRT_2};
+    const static Buffer _g1 = {0., -1. / SQRT_2, 1. / SQRT_2};
+    
+    Buffer approx = convolution(interpolation_factor_2(approx_and_tail), _g0);
+    Buffer tail = convolution(interpolation_factor_2(approx_and_tail), _g1);
+    
+    x = add_buffers(approx, tail);
+}
 

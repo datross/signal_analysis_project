@@ -7,7 +7,8 @@ using namespace std;
 bool test_all() {
 	bool result = test_interpolation_factor_2()
 		&& test_decimation_factor_2()
-		&& test_convolution();
+		&& test_convolution()
+        && test_analyse_haar();
 
 	if(result) cout << "Tests succeeded." << endl;
 	else cout << "One test failed." << endl;
@@ -58,8 +59,29 @@ bool test_convolution() {
 
 bool test_analyse_haar()
 {
+    cout << "Test Haar analysis. Verify the resulting plots." << endl;
+    
+    Buffer ramp = make_buffer_ramp(256);
+    Buffer leleccum = load_buffer_from_file("../data/leleccum.txt");
+    
+    Buffer approx_and_tail;
+    
+    analyse_haar(ramp, approx_and_tail);
+    write_buffer_to_file(approx_and_tail, "../tests_results/haar_analysis_ramp.txt");
+    analyse_haar(leleccum, approx_and_tail);
+    write_buffer_to_file(approx_and_tail, "../tests_results/haar_analysis_leleccum.txt");
+    
+    return true;
+}
+
+bool test_synthese_haar()
+{
+    cout << "Test Haar synthesis. Verify the resulting plots." << endl;
+    
     // TODO
+    
     return false;
 }
+
 
 

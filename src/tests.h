@@ -11,5 +11,6 @@ bool test_interpolation_factor_2();
 bool test_decimation_factor_2();
 bool test_convolution();
 bool test_analyse_haar();
+bool test_synthese_haar();
 
 #endif
