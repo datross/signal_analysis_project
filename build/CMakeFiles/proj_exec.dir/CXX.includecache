@@ -6,39 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/buffer.cpp
-buffer.h
-/home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/buffer.h
-iostream
--
-fstream
--
-string
--
-stdexcept
--
-sstream
--
-
 /home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/buffer.h
 vector
 -
 string
 -
-
-/home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/main.cpp
-iostream
--
-buffer.h
-/home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/buffer.h
-ops.h
-/home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/ops.h
-tests.h
-/home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/tests.h
-
-/home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/ops.cpp
-ops.h
-/home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/ops.h
 
 /home/6im3/mcrespin/Documents/Signal/signal_analysis_project/src/ops.h
 buffer.h
