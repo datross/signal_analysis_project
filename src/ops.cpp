@@ -123,5 +123,86 @@ void synthese_97(Buffer& x, const Buffer& approx_and_tail) {
     x = add_buffers(approx, tail);
 }
 
+unsigned mirror_index(const Buffer& b, int index) {
+    if(index < 0)
+        return -1 * index;
+    else if(index >= b.size())
+        return 2 * b.size() - index - 2;
+    else
+        return index;
+}
+
+void analyse_97_lifting(Buffer& x) {    
+    // Prediction 1
+    #define A -1.586134342
+    for(unsigned i = 1; i < x.size(); i += 2)
+        x[mirror_index(x, i)] += A * (x[mirror_index(x, i-1)] + x[mirror_index(x, i+1)]);
+    // Mise à jour 1
+    #define A -0.05298011854
+    for(unsigned i = 0; i < x.size(); i += 2)
+        x[mirror_index(x, i)] += A * (x[mirror_index(x, i-1)] + x[mirror_index(x, i+1)]);
+    // Prediction 2
+    #define A 0.8829110762
+    for(unsigned i = 1; i < x.size(); i += 2)
+        x[mirror_index(x, i)] += A * (x[mirror_index(x, i-1)] + x[mirror_index(x, i+1)]);
+    // Mise à jour 2
+    #define A 0.4435068522
+    for(unsigned i = 0; i < x.size(); i += 2)
+        x[mirror_index(x, i)] += A * (x[mirror_index(x, i-1)] + x[mirror_index(x, i+1)]);
+    // Mise à l'échelle
+    #define A (1./1.149604398)
+    for(unsigned i = 0; i < x.size(); i += 2) {
+        x[mirror_index(x, i)] /= A;
+        x[mirror_index(x, i+1)] *= A;
+    }
+    // Mise en forme
+    unsigned moitie = x.size() / 2;
+    Buffer tmp(moitie);
+    for(unsigned i = 0; i < moitie; ++i) {
+        tmp[i] = x[mirror_index(x, 2*i+1)];
+        x[mirror_index(x, i)] = x[mirror_index(x, 2*i)];
+    }
+    for(unsigned i = 0; i < moitie; ++i) {
+        x[mirror_index(x, i+moitie)] = tmp[i];
+    }
+}
+
+void synthese_97_lifting(Buffer& x) {
+    // Mise en forme
+    unsigned moitie = x.size() / 2;
+    Buffer tmp(moitie); // contient les indices pairs
+    for(unsigned i = 0; i < moitie; ++i) {
+        tmp[i] = x[mirror_index(x, i)];
+    }
+    for(unsigned i = 0; i < moitie; ++i) {
+        x[2*i] = tmp[i];
+        x[2*i+1] = x[i+moitie];
+    }
+    // Mise à l'échelle
+    #define A 1.149604398
+    for(unsigned i = 0; i < x.size(); i += 2) {
+        x[mirror_index(x, i)] /= A;
+        x[mirror_index(x, i+1)] *= A;
+    }
+    // Mise à jour 2
+    #define A -0.4435068522
+    for(unsigned i = 0; i < x.size(); i += 2)
+        x[mirror_index(x, i)] += A * (x[mirror_index(x, i-1)] + x[mirror_index(x, i+1)]);
+    // Prediction 2
+    #define A -0.8829110762
+    for(unsigned i = 1; i < x.size(); i += 2)
+        x[mirror_index(x, i)] += A * (x[mirror_index(x, i-1)] + x[mirror_index(x, i+1)]);
+    // Mise à jour 1
+    #define A 0.05298011854
+    for(unsigned i = 0; i < x.size(); i += 2)
+        x[mirror_index(x, i)] += A * (x[mirror_index(x, i-1)] + x[mirror_index(x, i+1)]);
+    // Prediction 1
+    #define A 1.586134342
+    for(unsigned i = 1; i < x.size(); i += 2)
+        x[mirror_index(x, i)] += A * (x[mirror_index(x, i-1)] + x[mirror_index(x, i+1)]);
+}
+
+
+
 
 

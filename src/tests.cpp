@@ -11,7 +11,9 @@ bool test_all() {
         && test_analyse_haar()
         && test_synthese_haar()
         && test_analyse_97()
-        && test_synthese_97();
+        && test_synthese_97()
+        && test_analyse_97_lifting()
+        && test_synthese_97_lifting();
 
 	if(result) cout << "Tests succeeded." << endl;
 	else cout << "One test failed." << endl;
@@ -60,8 +62,7 @@ bool test_convolution() {
     return buffer_equal(conv, expected);
 }
 
-bool test_analyse_haar()
-{
+bool test_analyse_haar() {
     cout << "Test Haar analysis. Verify the resulting plots." << endl;
     
     Buffer ramp = make_buffer_ramp(256);
@@ -77,8 +78,7 @@ bool test_analyse_haar()
     return true;
 }
 
-bool test_synthese_haar()
-{
+bool test_synthese_haar() {
     cout << "Test Haar synthesis. Verify the resulting plots." << endl;
     
     
@@ -99,8 +99,7 @@ bool test_synthese_haar()
     return true;
 }
 
-bool test_analyse_97()
-{
+bool test_analyse_97() {
     cout << "Test 97 analysis. Verify the resulting plots." << endl;
     
     Buffer ramp = make_buffer_ramp(256);
@@ -116,10 +115,8 @@ bool test_analyse_97()
     return true;
 }
 
-bool test_synthese_97()
-{
+bool test_synthese_97() {
     cout << "Test 97 synthesis. Verify the resulting plots." << endl;
-    
     
     Buffer ramp = make_buffer_ramp(256);
     Buffer leleccum = load_buffer_from_file("../data/leleccum.txt");
@@ -138,6 +135,31 @@ bool test_synthese_97()
     
     return true;
 }
+
+bool test_analyse_97_lifting() {
+    cout << "Test 97 analysis lifting. Verify the resultings plots." << endl;
+    
+    Buffer leleccum = load_buffer_from_file("../data/leleccum.txt");
+    
+    analyse_97_lifting(leleccum);
+    write_buffer_to_file(leleccum, "../tests_results/97_analysis_lifting_leleccum.txt");
+    
+    return true;
+}
+
+bool test_synthese_97_lifting() {
+    cout << "Test 97 syntesis lifting. Verify the resulting plots." << endl;
+    
+    Buffer leleccum = load_buffer_from_file("../data/leleccum.txt");
+    analyse_97_lifting(leleccum);
+    synthese_97_lifting(leleccum);
+    
+    write_buffer_to_file(leleccum, "../tests_results/97_synthesis_lifting_leleccum.txt");
+    
+    return true;
+}
+
+
 
 
 

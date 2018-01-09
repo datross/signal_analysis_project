@@ -13,5 +13,7 @@ void analyse_haar(const Buffer& x, Buffer& approx_and_tail);
 void synthese_haar(Buffer& x, const Buffer& approx_and_tail);
 void analyse_97(const Buffer& x, Buffer& approx_and_tail);
 void synthese_97(Buffer& x, const Buffer& approx_and_tail);
+void analyse_97_lifting(Buffer& x);
+void synthese_97_lifting(Buffer& x);
 
 #endif
