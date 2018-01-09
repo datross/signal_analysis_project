@@ -16,5 +16,6 @@ bool test_analyse_97();
 bool test_synthese_97();
 bool test_analyse_97_lifting();
 bool test_synthese_97_lifting();
+bool test_comparison_analysis();
 
 #endif

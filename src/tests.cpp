@@ -13,7 +13,8 @@ bool test_all() {
         && test_analyse_97()
         && test_synthese_97()
         && test_analyse_97_lifting()
-        && test_synthese_97_lifting();
+        && test_synthese_97_lifting()
+        && test_comparison_analysis();
 
 	if(result) cout << "Tests succeeded." << endl;
 	else cout << "One test failed." << endl;
@@ -155,6 +156,34 @@ bool test_synthese_97_lifting() {
     synthese_97_lifting(leleccum);
     
     write_buffer_to_file(leleccum, "../tests_results/97_synthesis_lifting_leleccum.txt");
+    
+    return true;
+}
+
+// Comparaison de toutes les méthodes d'analyse.
+// Elles sont toutes semblables (en particulier 97 et 97 lifting
+// sont quasiment identiques).
+// Cependant 97 lifting semble avoir une complexité légèrement inférieure 
+// au 97 (facteur 2) et il peut se faire en place (même si mon implémentation 
+// utilise un buffer temporaire pour la mise en forme, il doit y avoir un
+// moyen d'éviter cela).
+bool test_comparison_analysis() {
+    cout << "Test comparison analysis Haar, 97, 97 lifting. Verify the resulting plots." << endl;
+    
+    Buffer test = load_buffer_from_file("../data/ligne_milieu_image.txt");
+    
+    // Haar
+    Buffer approx_and_tail;
+    analyse_haar(test, approx_and_tail);
+    write_buffer_to_file(approx_and_tail, "../tests_results/haar_analysis_ligne_milieu.txt");
+    
+    // 97
+    analyse_97(test, approx_and_tail);
+    write_buffer_to_file(approx_and_tail, "../tests_results/97_analysis_ligne_milieu.txt");
+    
+    // 97 lifting
+    analyse_97_lifting(test);
+    write_buffer_to_file(test, "../tests_results/97_analysis_lifting_ligne_milieu.txt");
     
     return true;
 }
