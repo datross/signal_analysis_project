@@ -1,5 +1,8 @@
 #include "ops.h"
 
+#include <algorithm>
+#include <cmath>
+
 #define SQRT_2 1.41421356237
 
 Buffer interpolation_factor_2(const Buffer& b) {
@@ -201,6 +204,83 @@ void synthese_97_lifting(Buffer& x) {
     for(unsigned i = 1; i < x.size(); i += 2)
         x[mirror_index(x, i)] += A * (x[mirror_index(x, i-1)] + x[mirror_index(x, i+1)]);
 }
+
+void amr(Buffer& x, unsigned niveau) {
+    Buffer tmp;
+    unsigned analyse_window = x.size();
+    for(unsigned i = 0; i < niveau; ++i) {
+        tmp = Buffer(x.begin(), x.begin() + analyse_window);
+        analyse_97_lifting(tmp);
+        std::copy(tmp.begin(), tmp.end(), x.begin());
+        analyse_window /= 2;
+    }
+}
+
+void iamr(Buffer& x, unsigned niveau) {
+    Buffer tmp;
+    unsigned analyse_window = x.size() / (std::pow(2, niveau-1));
+    for(unsigned i = 0; i < niveau; ++i) {
+        tmp = Buffer(x.begin(), x.begin() + analyse_window);
+        synthese_97_lifting(tmp);
+        std::copy(tmp.begin(), tmp.end(), x.begin());
+        analyse_window *= 2;
+    }
+}
+
+void analyse2D_97(Buffer2D& m) {
+    // computes ml
+    for(unsigned y = 0; y < m.h(); ++y) {
+        analyse_97_lifting(m.data[y]);
+    }
+    // computes md
+    m = m.transpose();
+    for(unsigned y = 0; y < m.h(); ++y) {
+        analyse_97_lifting(m.data[y]);
+    }
+    m = m.transpose();
+}
+
+void synthese2D_97(Buffer2D& m) {
+    // computes md
+    m = m.transpose();
+    for(unsigned y = 0; y < m.h(); ++y) {
+        synthese_97_lifting(m.data[y]);
+    }
+    m = m.transpose();
+    // computes ml
+    for(unsigned y = 0; y < m.h(); ++y) {
+        synthese_97_lifting(m.data[y]);
+    }
+}
+
+void amr2D_97(Buffer2D& m, unsigned niveau) {
+    Buffer2D tmp;
+    unsigned w_window = m.w(),
+             h_window = m.h();
+    for(unsigned i = 0; i < niveau; ++i) {
+        tmp = m.extract(0, 0, w_window, h_window);
+        analyse2D_97(tmp);
+        m.overwrite(tmp, 0, 0);
+        w_window /= 2;
+        h_window /= 2;
+    }
+}
+
+void iamr2D_97(Buffer2D& m, unsigned niveau) {
+    Buffer2D tmp;
+    unsigned w_window = m.w() / pow(2, niveau - 1),
+             h_window = m.h() / pow(2, niveau - 1);
+    for(unsigned i = 0; i < niveau; ++i) {
+        tmp = m.extract(0, 0, w_window, h_window);
+        synthese2D_97(tmp);
+        m.overwrite(tmp, 0, 0);
+        w_window *= 2;
+        h_window *= 2;
+    }
+}
+
+
+
 
 
 

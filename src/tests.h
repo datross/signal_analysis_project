@@ -17,5 +17,8 @@ bool test_synthese_97();
 bool test_analyse_97_lifting();
 bool test_synthese_97_lifting();
 bool test_comparison_analysis();
+bool test_amr_iamr();
+bool test_analyse2D_97();
+bool test_amr2D_iamr2D();
 
 #endif

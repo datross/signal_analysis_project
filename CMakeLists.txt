@@ -12,6 +12,8 @@ endmacro(use_cxx11)
 
 project(signal_project)
 
+include_directories(external)
+
 file(GLOB SOURCES "src/*.cpp")
 
 add_executable(proj_exec ${SOURCES})
